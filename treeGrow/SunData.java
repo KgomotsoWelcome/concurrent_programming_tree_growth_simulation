@@ -1,4 +1,4 @@
-package treeGrow;
+//package treeGrow;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +12,7 @@ public class SunData{
 	Land sunmap; // regular grid with average daily sunlight stored at each grid point
 	Tree [] trees; // array of individual tress located on the sunmap	
 	
+	// read in sun exposure and tree data from file
 	void readData(String fileName){ 
 		try{ 
 			Scanner sc = new Scanner(new File(fileName));
@@ -48,6 +49,7 @@ public class SunData{
 		}
 	}
 	
+	// write tree data to file
 	void writeData(String fileName){
 		 try{ 
 			 FileWriter fileWriter = new FileWriter(fileName);
