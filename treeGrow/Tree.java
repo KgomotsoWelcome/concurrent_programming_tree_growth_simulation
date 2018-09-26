@@ -39,7 +39,7 @@ public
 	synchronized float sunexposure(Land land){
 		// to do 
 		
-		float treeSum = 0;
+		float treetotal = 0;
 		int extent = (int)getExt();
 		int ytree = getY();
 		int xtree = getX();
@@ -50,13 +50,14 @@ public
 		{
 			for (int j = xtree-extent; j<xtree+extent; j++)
 			{
-				treeSum = treeSum + land.getShade(j,i);
+				//System.out.println("x = "+getX()+", y = "+getY() +", i = "+i+", j = "+j);
+				treetotal = treetotal + land.getShade(j,i);
 				count++;
 			}
 		}
 		
-		float average = treeSum/count;
-		return 0.0f; // not correct
+		float average = treetotal/count;
+		return average; // not correct
 	}
 	
 	// is the tree extent within the provided range [minr, maxr)

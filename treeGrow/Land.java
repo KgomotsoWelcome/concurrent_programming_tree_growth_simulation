@@ -7,6 +7,7 @@ public class Land{
 	int DimX;
 	int DimY;
 	float SunExposure[][];
+	float shade[][];
 
 	static float shadefraction = 0.1f; // only this fraction of light is transmitted by a tree
 
@@ -14,6 +15,7 @@ public class Land{
 		DimX = dx;
 		DimY = dy;
 		SunExposure = new float [DimY][DimX];
+		shade = new float [DimY][DimX];
 	}
 
 	// return the number of landscape cells in the x dimension
@@ -30,13 +32,7 @@ public class Land{
 	// Needs to be done after each growth pass of the simulator
 	public synchronized void resetShade() {
 		// to do
-		for (int i = 0; i<DimY; i++)
-		{
-			for(int j = 0; j<DimX; j++)
-			{
-				SunExposure[i][j] = (SunExposure[i][j] + (SunExposure[i][j]*0.9f));
-			}
-		}
+		shade = SunExposure;
 	}
 	
 	// return the sun exposure of the initial unshaded landscape at position <x,y?
@@ -53,13 +49,14 @@ public class Land{
 	// return the current sun exposure of the shaded landscape at position <x,y>
 	public synchronized float getShade(int x, int y) {
 		// to do 
-		return SunExposure[y][x];
+		System.out.println("x = "+x+", y = "+y);
+		return shade[y][x];
 	}
 	
 	// set the sun exposure of the shaded landscape at position <x,y> to <val>
 	public synchronized void setShade(int x, int y, float val){
 		// to do
-		SunExposure[y][x] = val*shadefraction;
+		shade[y][x] = val;
 	}
 	
 	// reduce the sun exposure of the shaded landscape to 10% of the original
@@ -74,7 +71,7 @@ public class Land{
 		{
 			for (int j = xtree-extent; j<xtree+extent; j++)
 			{
-				SunExposure[i][j] = SunExposure[i][j]*shadefraction;
+				setShade(xtree, ytree, getShade(xtree,ytree)*shadefraction);
 			}
 		}
 	}

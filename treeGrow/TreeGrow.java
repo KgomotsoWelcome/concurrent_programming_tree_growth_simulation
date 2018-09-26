@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.awt.*;
 
 public class TreeGrow {
 	static long startTime = 0;
@@ -24,6 +25,8 @@ public class TreeGrow {
 	}
 	
 	public static void setupGUI(int frameX,int frameY,Tree [] trees) {
+		
+		
 		Dimension fsize = new Dimension(800, 800);
 		// Frame init and dimensions
     	JFrame frame = new JFrame("Photosynthesis"); 
@@ -40,15 +43,44 @@ public class TreeGrow {
 		JScrollPane scrollFrame = new JScrollPane(fp);
 		fp.setAutoscrolls(true);
 		scrollFrame.setPreferredSize(fsize);
+		
+		JPanel p = new JPanel();
+		p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+		
+		JButton reset = new JButton("Reset");
+		JButton pause = new JButton("Pause");
+		JButton play = new JButton("Play");
+		JButton end = new JButton("End");
+      	reset.addActionListener(
+			new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent ae) {
+					System.out.println("Button was clicked.");
+					System.out.println("Main thread is name :"+ Thread.currentThread().getName());
+				}
+				
+				});
+				
+			
 	    g.add(scrollFrame);
+	    p.add(reset);
+	    p.add(pause);
+	    p.add(play);
+	    p.add(end);	
     	
       	frame.setLocationRelativeTo(null);  // Center window on screen.
       	frame.add(g); //add contents to window
-        frame.setContentPane(g);     
+      	frame.add(p);
+        frame.setContentPane(g);  
+        //frame.setContentPane(p);    
         frame.setVisible(true);
+        //System.out.println("Main thread is name :"+ Thread.currentThread().getName());
         Thread fpt = new Thread(fp);
         fpt.start();
+        
 	}
+	
 	
 		
 	public static void main(String[] args) {
@@ -69,6 +101,10 @@ public class TreeGrow {
 		frameY = sundata.sunmap.getDimY();
 		setupGUI(frameX, frameY, sundata.trees);
 		
-		// create and start simulation loop here as separate thread
+		//create and start simulation loop here as separate thread
+		//System.out.println("Main thread is name : "+ Thread.currentThread().getName());
+		
+		Thread stimulate = new Thread(new Stimulate(sundata.trees,sundata.sunmap));
+        stimulate.start();
 	}
 }
