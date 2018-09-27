@@ -40,23 +40,24 @@ public
 		// to do 
 		
 		float treetotal = 0;
-		int extent = (int)getExt();
+		int extent = Math.round(getExt());
 		int ytree = getY();
 		int xtree = getX();
 		
 		int count = 0;
 		
-		for (int i = ytree-extent; i<ytree+extent; i++)
+		for (int i = ytree-extent; i<=ytree+extent; i++)
 		{
-			for (int j = xtree-extent; j<xtree+extent; j++)
+			for (int j = xtree-extent; j<=xtree+extent; j++)
 			{
-				//System.out.println("x = "+getX()+", y = "+getY() +", i = "+i+", j = "+j);
-				treetotal = treetotal + land.getShade(j,i);
-				count++;
+				if (i<land.DimY && j<land.DimX && i>0 && j>0)
+				{
+					treetotal = treetotal + land.getShade(j,i);
+					count++;
+				}
 			}
 		}
-		
-		float average = treetotal/count;
+		float average = treetotal/(float)count;
 		return average; // not correct
 	}
 	
@@ -68,6 +69,6 @@ public
 	// grow a tree according to its sun exposure
 	synchronized void sungrow(Land land) {
 		// to do
-		ext = ext + land.getShade(getX(),getY());
+			ext = ext + sunexposure(land)/growfactor;
 	}
 }

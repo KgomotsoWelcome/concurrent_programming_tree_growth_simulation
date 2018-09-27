@@ -1,4 +1,4 @@
-public class Stimulate extends Thread{
+public class Stimulate extends Thread implements Runnable{
     Tree[] trees;
 	Land landscape;
     public Stimulate(Tree[]trees,Land landscape)
@@ -9,20 +9,17 @@ public class Stimulate extends Thread{
     
     public void run()
     {
-        float minh = 0.0f;
-		float maxh = 2.0f;
-		for(int layer = 0; layer <= 10; layer++) {
-			for(int t = 0; t < trees.length; t++){
-				//int rt = rndorder.get(t); 
-				if(trees[t].inrange(minh,maxh)) { // only render trees in current band
-					trees[t].sunexposure(landscape);
-					//landscape.setShade(trees[t].getX(), trees[t].getY(), trees[t].getExt());
+		while(true)
+		{
+			for(int t = trees.length-1; t > 0; t--)
+			{
+				trees[t].setExt(trees[t].getExt()+0.45f);//trees[t].sunexposure(landscape)/1000);
+					//trees[t].sunexposure(landscape);
 					//trees[t].sungrow(landscape);
-				}
+					//landscape.setShade(trees[t].getX(), trees[t].getY(), trees[t].getExt());
+					
 			}
-			minh = maxh;  // next band of trees
-			maxh += 2.0f;
-		}
-    }
-    
+	}
+		
+	}
 }

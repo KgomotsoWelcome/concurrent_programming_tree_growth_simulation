@@ -38,25 +38,36 @@ public class Land{
 	// return the sun exposure of the initial unshaded landscape at position <x,y?
 	public synchronized float getFull(int x, int y) {
 		// to do
-		return SunExposure[y][x];
+		if (y<DimY && x<DimX && x>0 && y>0){
+			return SunExposure[y][x];
+		}else {
+			return 0.0f;
+			}
 	}
 	
 	// set the sun exposure of the initial unshaded landscape at position <x,y> to <val>
 	public synchronized void setFull(int x, int y, float val) {
-		SunExposure[y][x] = val;
+		if (y<DimY && x<DimX && x>0 && y>0){
+			SunExposure[y][x] = val;
+		}
 	}
 	
 	// return the current sun exposure of the shaded landscape at position <x,y>
 	public synchronized float getShade(int x, int y) {
 		// to do 
-		System.out.println("x = "+x+", y = "+y);
-		return shade[y][x];
+		if (y<DimY && x<DimX && x>0 && y>0){
+			return shade[y][x];
+		}else {
+			return 0.0f;
+			}
 	}
 	
 	// set the sun exposure of the shaded landscape at position <x,y> to <val>
 	public synchronized void setShade(int x, int y, float val){
 		// to do
+		if (y<DimY && x<DimX && x>0 && y>0){
 		shade[y][x] = val;
+	}
 	}
 	
 	// reduce the sun exposure of the shaded landscape to 10% of the original
@@ -71,7 +82,10 @@ public class Land{
 		{
 			for (int j = xtree-extent; j<xtree+extent; j++)
 			{
-				setShade(xtree, ytree, getShade(xtree,ytree)*shadefraction);
+				if (i<DimY && j<DimX && i>0 && j>0)
+				{
+					setShade(xtree, ytree, getShade(xtree,ytree)*shadefraction);
+				}
 			}
 		}
 	}
