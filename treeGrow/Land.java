@@ -19,24 +19,24 @@ public class Land{
 	}
 
 	// return the number of landscape cells in the x dimension
-	public synchronized int getDimX() {
+	public int getDimX() {
 		return DimX; 
 	}
 	
 	// return the number of landscape cells in the y dimension
-	public synchronized int getDimY() {
+	public int getDimY() {
 		return DimY; 
 	}
 	
 	// Reset the shaded landscape to the same as the initial sun exposed landscape
 	// Needs to be done after each growth pass of the simulator
-	public synchronized void resetShade() {
+	public void resetShade() {
 		// to do
 		shade = SunExposure;
 	}
 	
 	// return the sun exposure of the initial unshaded landscape at position <x,y?
-	public synchronized float getFull(int x, int y) {
+	public float getFull(int x, int y) {
 		// to do
 		if (y<DimY && x<DimX && x>0 && y>0){
 			return SunExposure[y][x];
@@ -46,14 +46,14 @@ public class Land{
 	}
 	
 	// set the sun exposure of the initial unshaded landscape at position <x,y> to <val>
-	public synchronized void setFull(int x, int y, float val) {
+	public void setFull(int x, int y, float val) {
 		if (y<DimY && x<DimX && x>0 && y>0){
 			SunExposure[y][x] = val;
 		}
 	}
 	
 	// return the current sun exposure of the shaded landscape at position <x,y>
-	public synchronized float getShade(int x, int y) {
+	public float getShade(int x, int y) {
 		// to do 
 		if (y<DimY && x<DimX && x>0 && y>0){
 			return shade[y][x];
@@ -63,7 +63,7 @@ public class Land{
 	}
 	
 	// set the sun exposure of the shaded landscape at position <x,y> to <val>
-	public synchronized void setShade(int x, int y, float val){
+	public void setShade(int x, int y, float val){
 		// to do
 		if (y<DimY && x<DimX && x>0 && y>0){
 		shade[y][x] = val;

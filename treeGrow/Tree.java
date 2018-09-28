@@ -16,22 +16,22 @@ public
 	}
 	
 	// return the x-position of the tree center
-	synchronized int getX() {
+	int getX() {
 		return xpos;
 	}
 	
 	// return the y-position of the tree center
-	synchronized int getY() {
+	int getY() {
 		return ypos;
 	}
 	
 	// return the extent of the tree
-	synchronized float getExt() {
+	float getExt() {
 		return ext;
 	}
 	
 	// set the extent of the tree to <e>
-	synchronized void setExt(float e) {
+	void setExt(float e) {
 		ext = e;
 	}
 
@@ -40,20 +40,24 @@ public
 		// to do 
 		
 		float treetotal = 0;
-		int extent = Math.round(getExt());
+		int extent = (int)getExt();
 		int ytree = getY();
 		int xtree = getX();
 		
 		int count = 0;
 		
-		for (int i = ytree-extent; i<=ytree+extent; i++)
+		for (int i = ytree-extent; i <= ytree+extent; i++)
 		{
-			for (int j = xtree-extent; j<=xtree+extent; j++)
+			for (int j = xtree-extent; j <= xtree+extent; j++)
 			{
-				if (i<land.DimY && j<land.DimX && i>0 && j>0)
+				if (i<xtree|| j<ytree)
 				{
-					treetotal = treetotal + land.getShade(j,i);
+					treetotal = treetotal + land.getShade(i,j);
 					count++;
+				}
+				else 
+				{
+					
 				}
 			}
 		}
@@ -62,13 +66,14 @@ public
 	}
 	
 	// is the tree extent within the provided range [minr, maxr)
-	synchronized boolean inrange(float minr, float maxr) {
+	boolean inrange(float minr, float maxr) {
 		return (ext >= minr && ext < maxr);
 	}
 	
 	// grow a tree according to its sun exposure
 	synchronized void sungrow(Land land) {
 		// to do
-			ext = ext + sunexposure(land)/growfactor;
+		setExt(ext + sunexposure(land)/growfactor);
+		land.shadow(this);
 	}
 }

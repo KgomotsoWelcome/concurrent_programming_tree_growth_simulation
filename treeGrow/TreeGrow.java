@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.awt.*;
+import java.util.*;
 
 public class TreeGrow {
 	static long startTime = 0;
@@ -14,6 +15,8 @@ public class TreeGrow {
 	static int frameY;
 	static ForestPanel fp;
 	static SunData sundata = new SunData();
+	static Thread[] threads = new Thread[10];
+	static boolean paused = false;
 	// start timer
 	private static void tick(){
 		startTime = System.currentTimeMillis();
@@ -61,17 +64,6 @@ public class TreeGrow {
 				}
 				
 				});
-				
-		/** Button pau/** Button pause temporarily stops the simulation
-		 */ 
-		JButton pause = new JButton("Pause");
-		pause.addActionListener(
-			new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("Button pause was clicked.");
-				}
-				
-				});
 		
 		/** Button play starts simulation or continues simulation if paused was used.
 		 */ 
@@ -84,23 +76,54 @@ public class TreeGrow {
 					System.out.println("Button Play was clicked.");
 					float minh = 18.0f;
 					float maxh = 20.0f;
-					//Stimulate threads = 
-					Thread th = new Thread (new Stimulate(sundata.trees,sundata.sunmap));
-					th.start();
-					/*Stimulate [] threads = new Stimulate[10];
+	
+					ArrayList<Tree> threadtrees = new ArrayList<Tree>();
 					for(int layer = 0; layer < 10; layer++)
 					{
-						threads[layer] = new Stimulate(sundata.trees,sundata.sunmap);
-						minh -= maxh;  // next band of trees
+						for (int tree = 0 ; tree<trees.length; tree++ )
+						{
+							if(trees[tree].getExt() >= minh && trees[tree].getExt() < maxh) 
+							{
+								threadtrees.add(trees[tree]);
+							}
+							//Tree [] convertArray = new Tree[threadtrees.size()];
+							//convertArray =  threadtrees.toArray(convertArray);
+							threads[layer] = new Thread (new Stimulate(sundata.trees,sundata.sunmap));
+						}
+						threadtrees.clear();
+						minh -= 2.0f;  // next band of trees
 						maxh -= 2.0f;
 					}
 					
 					for(int i = 0; i<threads.length;i++)
 					{
 						threads[i].start();
-					}*/
+					}
 				}
 			});
+			
+		/**Button pause temporarily stops the simulation
+		 */ 
+		JButton pause = new JButton("Pause");
+		pause.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.out.println("Button pause was clicked.");
+					
+					for(int i = 0; i<threads.length;i++)
+					{
+						try
+						{
+							threads[i].sleep(1000);
+						}
+						catch(Exception c)
+						{
+							System.out.println(c);
+						}	
+					}
+				}
+				
+				});
 		
 		/** Button end closes window and exits program.
 		 */ 
@@ -149,24 +172,5 @@ public class TreeGrow {
 		setupGUI(frameX, frameY, sundata.trees);
 		
 		//create and start simulation loop here as separate thread
-		/**
-		float minh = 0.0f;
-		float maxh = 2.0f;
-		Stimulate [] threads = new Stimulate[10];
-		for(int layer = 0; layer < 10; layer++)
-		{
-			threads[layer] = new Stimulate(sundata.trees,sundata.sunmap);
-			minh -= maxh;  // next band of trees
-			maxh -= 2.0f;
-		}
-		
-		for(int i = 0; i<threads.length;i++)
-		{
-			threads[i].start();
-		}
-		*/ 
-		
-		//Thread stimulate = new Thread(new Stimulate(sundata.trees,sundata.sunmap));
-        //stimulate.start();
 	}
 }
