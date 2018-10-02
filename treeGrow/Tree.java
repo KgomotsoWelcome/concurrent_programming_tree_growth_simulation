@@ -6,7 +6,7 @@ public class Tree{
 private
 	int xpos;	// x-coordinate of center of tree canopy
 	int ypos;	// y-coorindate of center of tree canopy
-	float ext;	// extent of canopy out in vertical and horizontal from center
+	volatile float ext;	// extent of canopy out in vertical and horizontal from center
 	
 	static float growfactor = 1000.0f; // divide average sun exposure by this amount to get growth in extent
 	
@@ -38,7 +38,6 @@ public
 	// return the average sunlight for the cells covered by the tree
 	synchronized float sunexposure(Land land){
 		// to do 
-		
 		float treetotal = 0;
 		int extent = (int)getExt();
 		int ytree = getY();

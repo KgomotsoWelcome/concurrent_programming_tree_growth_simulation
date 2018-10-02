@@ -4,12 +4,12 @@ public class Land{
 	
 	// to do
 	// sun exposure data here
-	int DimX;
-	int DimY;
+	volatile int DimX;
+	volatile int DimY;
 	float SunExposure[][];
 	float shade[][];
 
-	static float shadefraction = 0.1f; // only this fraction of light is transmitted by a tree
+	static volatile float shadefraction = 0.1f; // only this fraction of light is transmitted by a tree
 
 	Land(int dx, int dy) {
 		DimX = dx;
@@ -53,7 +53,7 @@ public class Land{
 	}
 	
 	// return the current sun exposure of the shaded landscape at position <x,y>
-	public float getShade(int x, int y) {
+	public synchronized float getShade(int x, int y) {
 		// to do 
 		if (y<DimY && x<DimX && x>0 && y>0){
 			return shade[y][x];
