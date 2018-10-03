@@ -1,0 +1,35 @@
+commit 5c9d1161e4545d9c9dc4d39a71b916ecbcd039bd
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Tue Oct 2 22:03:11 2018 +0200
+
+    Modifiying the application
+
+commit 570f3a71a0ac2097d87539fde8bdf95b9921e882
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Fri Sep 28 17:17:38 2018 +0200
+
+    Updating files
+
+commit 8f17a144524f1ca099b56f1e4c6a1d0ac02dbf37
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Thu Sep 27 23:00:39 2018 +0200
+
+    Updating
+
+commit 20b63fd12393e3846d665c420682c5b353613271
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Wed Sep 26 22:58:48 2018 +0200
+
+    Creating thread class
+
+commit 1d2e34f2ee0a5d6a05c246a7a3a7ed1f49d2c772
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Tue Sep 25 22:59:46 2018 +0200
+
+    Done with Land and Tree.
+
+commit 585cbfbf9f4129685cf0fb14666b7b85a0513677
+Author: Kgomotso Welcome <kgomotsowelcome02@gmail.com>
+Date:   Tue Sep 25 00:00:49 2018 +0200
+
+    Adding files

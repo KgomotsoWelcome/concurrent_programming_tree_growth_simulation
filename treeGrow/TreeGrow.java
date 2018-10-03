@@ -13,6 +13,7 @@ public class TreeGrow {
 	static long startTime = 0;
 	static int frameX;
 	static int frameY;
+	static int count;
 	static ForestPanel fp;
 	static SunData sundata = new SunData();
 	static Thread[] threads = new Thread[10];
